@@ -1,0 +1,46 @@
+/* src/components/message/message.css */
+
+.message {
+	margin: 10px;
+	padding: 0px 10px;
+	border-radius: 15px;
+	word-wrap: break-word;
+	text-align: justify;
+}
+
+.message p {
+	font-size: medium;
+}
+  
+.user-message {
+	align-self: flex-end;
+	background-color: #007bff;
+	color: white;
+	max-width: 60%;
+}
+
+.bot-message {
+	align-self: flex-start;
+	color: black;
+	width: 80%;
+}
+
+.bot-message li {
+	list-style-type:disc;
+}
+  
+@media screen and (max-width: 900px) {
+	.message {
+		margin: 5px;
+		padding: 0px 5px;
+	}
+	.message p {
+		font-size: smaller;
+	}
+	.user-message {
+		max-width: 80%;
+	}
+	.bot-message {
+		width: 90%;
+	}
+}

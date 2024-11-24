@@ -1,0 +1,35 @@
+  /* src/components/sidebar/sidebar.css */
+
+  .sidebar-container {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	padding-left: 20px;
+  }
+  
+  .MuiListItemIcon-root {
+	color: white !important;
+  }
+
+  .new-session-button {
+	flex-shrink: 0;
+  }
+  
+  .sessions-list {
+	overflow-y: auto;
+	max-height: 70%;
+	min-width: 200px;
+  }
+  
+  .fixed-bottom {
+	flex-shrink: 0;
+  }
+
+  .session-item.active-session {
+	background-color: rgba(0, 0, 255, 0.1); /* Adjust the color as needed */
+  }
+  
+  .session-item.active-session:hover {
+	background-color: rgba(0, 0, 255, 0.2); /* Adjust the color as needed */
+  }

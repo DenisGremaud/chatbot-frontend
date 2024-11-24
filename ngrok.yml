@@ -1,0 +1,10 @@
+version: '2'
+tunnels:
+  test:
+    proto: http
+    addr: http://host.docker.internal:80
+    domain: winning-famous-gnu.ngrok-free.app
+    oauth: 
+      provider: "google"
+      allow_domains: ["unisis.ch"]
+      # allow_emails: ["denis.gremaud@gmail.com"]

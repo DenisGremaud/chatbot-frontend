@@ -1,0 +1,23 @@
+.katex {
+	font-size: larger;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+	font-size: medium;
+}
+  
+table th, table td {
+	border: 1px solid black;
+	padding: 8px;
+}
+
+@media screen and (max-width: 900px) {
+	.katex {
+		font-size: smaller;
+	}
+	table {
+		font-size:smaller;
+	}
+}

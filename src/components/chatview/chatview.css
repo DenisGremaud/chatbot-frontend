@@ -1,0 +1,155 @@
+.chat-container {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+  }
+  
+  .chat-message-list {
+	flex: 1;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+  }
+  
+  .messages-list {
+	flex: 1;
+	overflow-y: auto;
+	margin: 0 0 0 0;
+	display: flex;
+	flex-direction: column;
+	padding: 0;
+  }
+  
+  .messages-list li {
+	list-style-type: none;
+  }
+  
+  .message-form {
+	display: flex;
+	padding: 10px;
+	box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+  }
+  
+  .message-input {
+	flex-grow: 1;
+	min-height: 25px;
+	max-height: 200px;
+	resize: vertical;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	margin-right: 10px;
+	overflow-y: auto;
+  }
+  
+  .send-button {
+	width: 50px;
+	height: 50px;
+	background-color: #007bff !important;
+	color: white;
+	border: none;
+	border-radius: 50%;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  }
+  
+  .send-button.receiving {
+	background-color: #cccccc !important;
+  }
+  
+  .send-button:disabled {
+	cursor: not-allowed;
+  }
+  
+  .send-button:not(.receiving):hover {
+	background-color: #0056b3 !important;
+  }
+  
+  .send-icon {
+	color: white;
+  }
+  
+  .scroll-button-container {
+	display: flex;
+	justify-content: center;
+  }
+  
+  .scroll-button {
+	background-color: #007bff !important;
+	color: white;
+	border: none;
+	border-radius: 50%;
+	padding: 10px;
+	cursor: pointer;
+  }
+  
+  .scroll-button:hover {
+	background-color: #0056b3 !important;
+  }
+
+  img {
+	max-width: 650px;
+  }
+  
+  @media screen and (max-width: 900px) {
+	.message {
+	  margin: 5px;
+	  padding: 0px 5px;
+	}
+	.message p {
+	  font-size: smaller;
+	}
+	.user-message {
+	  max-width: 80%;
+	}
+	.bot-message {
+	  width: 90%;
+	}
+  }
+  
+  @media screen and (max-width: 600px) {
+	.message-input {
+	  padding: 8px;
+	}
+	.send-button {
+	  width: 40px;
+	  height: 40px;
+	}
+	.scroll-button {
+	  width: 40px;
+	  height: 40px;
+	}
+	img {
+	  max-width: 350px;
+	}
+  }
+  
+  /* Test for mobile */
+  @media screen and (max-width: 480px) {
+	.message-form {
+	  position: fixed;
+	  bottom: 0;
+	  left: 0;
+	  right: 0;
+	  background-color: white;
+	  padding: 10px;
+	  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+	}
+
+	.message-form.hide {
+	  z-index: -1;
+	}
+	
+	.messages-list {
+	  padding-bottom: 50px;
+	}
+
+	.scroll-button-container {
+		position: relative;
+		bottom: 75px;
+	}
+  }
