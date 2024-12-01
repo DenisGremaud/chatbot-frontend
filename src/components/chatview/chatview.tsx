@@ -3,7 +3,7 @@ import React, { useCallback, useRef, useEffect, FormEvent, KeyboardEvent, useSta
 import { Box, IconButton, TextareaAutosize } from '@mui/material';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import SendIcon from '@mui/icons-material/Send';
-import Message, { MessageProps, MessageType, MessageStatus } from '../message/message';
+import Message, { MessageProps, MessageStatus } from '../message/message';
 import ChatManager from './chatmanager';
 import './chatview.css';
 

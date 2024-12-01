@@ -42,31 +42,45 @@ class ChatManager {
   }
 
   private initSocket() {
-    this.socket = io(Config.SOCKET_URL);
+
+    this.socket = io(Config.SOCKET_URL, {
+		transports: ['websocket'],
+		reconnection: true,
+		reconnectionDelay: 1000,
+		reconnectionDelayMax: 5000,
+		reconnectionAttempts: 3,
+	});
+
+	this.socket.on('welcome', (data: any) => {
+		console.log(data.message);
+	});
+	
 
     this.socket.on('connect', () => {
 	  if (!this.userUUID) {
+		console.log('User UUID not found. Creating new user UUID.');
         this.createUserUUID();
 	  } else if (this.sessionId) {
-        this.socket!.emit('restore_session', { session_id: this.sessionId });
+        this.socket!.emit('restore_session', { sessionID: this.sessionId });
       } else {
         this.socket!.emit('init', { user_uuid: this.userUUID });
       }
     });
 
-    this.socket.on('session_init', (data) => {
-      this.sessionId = data.session_id;
-      this.messages.push({ type: MessageType.Bot, content: data.initial_message });
+    this.socket.on('session_init', (data: any) => {
+      this.sessionId = data.sessionId;
+      this.messages.push({ type: MessageType.Bot, content: data.initialMessage });
       this.updateMessages();
 	  if (this.newSessionCallback) {
-		this.newSessionCallback(data.session_id);
+		this.newSessionCallback(data.sessionId);
 	  }
     });
 
-    this.socket.on('session_restored', (data) => {
-      localStorage.setItem('sessionId', data.session_id);
-      this.sessionId = data.session_id;
-      this.messages = data.chat_history;
+    this.socket.on('session_restored', (data: any) => {
+      localStorage.setItem('sessionId', data.sessionId);
+      this.sessionId = data.sessionId;
+	  console.log(data);
+      this.messages = data.chatHistory;
       this.updateMessages();
     });
 
@@ -75,7 +89,7 @@ class ChatManager {
       this.updateMessages();
     });
 
-    this.socket.on('response', (message) => {
+    this.socket.on('response', (message: any) => {
       this.messages = this.messages.map((msg) =>
         msg.status === MessageStatus.Ongoing ? { ...msg, content: msg.content + message } : msg
       );
@@ -90,18 +104,22 @@ class ChatManager {
       this.updateMessages();
     });
 
-    this.socket.on('disconnect', () => {
-      console.log('Disconnected from server');
-    });
+    this.socket.on("disconnect", (reason, details) => {
+		console.log(reason);
+		console.log(details);
+	  });
 
-	this.socket.on('error', (error) => {
-		console.error(error);
+	this.socket.on('connect_error', (err) => console.error('Connect error:', err));
+
+
+	this.socket.on('error', (error: any) => {
+		console.error('Socket error:', error);
 	});
   }
 
   public sendMessage(content: string) {
     if (this.sessionId) {
-      this.socket?.emit('query', { question: content, session_id: this.sessionId });
+      this.socket?.emit('query', { input: content, sessionId: this.sessionId });
       this.messages.push({ type: MessageType.User, content });
       this.updateMessages();
     } else {
@@ -119,8 +137,8 @@ class ChatManager {
   public async createUserUUID() {
 	localStorage.removeItem('userUUID');
 	try {
-		const response = await fetch(`${Config.API_URL}/create_user`, {
-			method: 'POST',
+		const response = await fetch(`${Config.API_URL}/user/create`, {
+			method: 'GET',
 			headers: {
 			'Content-Type': 'application/json'
 			},
@@ -142,10 +160,9 @@ class ChatManager {
 	  return false;
 	} else if (this.userUUID) {
 	  try {
-		const response = await fetch(`${Config.API_URL}/check_user_exists/${this.userUUID}`);
+		const response = await fetch(`${Config.API_URL}/user/exists/${this.userUUID}`);
 		const data = await response.json();
-		console.log('User exists:', data.user_exists);
-		return data.user_exists;
+		return data;
 	  } catch (error) {
 		console.error('Error checking if user exists:', error);
 	  }
@@ -161,11 +178,11 @@ class ChatManager {
   public async getUserSessions(): Promise<string[]> {
     if (this.userUUID) {
       try {
-        const response = await fetch(`${Config.API_URL}/get_user_sessions/${this.userUUID}`);
+        const response = await fetch(`${Config.API_URL}/user/sessions/${this.userUUID}`);
         if (!response.ok) {
           throw new Error(`Error fetching sessions: ${response.statusText}`);
         }
-        const { session_ids } = await response.json();
+        const session_ids = await response.json().then((data) => data.session_ids);
         return session_ids || [];
       } catch (error) {
         console.error('Failed to fetch user sessions:', error);
@@ -178,7 +195,7 @@ class ChatManager {
   }
 
   public restoreSession(sessionId: string) {
-	this.socket?.emit('restore_session', { session_id: sessionId });
+	this.socket?.emit('restore_session', { sessionId: sessionId });
   }
 
   public getStoredSessionId(): string | null {

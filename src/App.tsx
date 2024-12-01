@@ -60,9 +60,8 @@ function App() {
 			await chatManager.createUserUUID();
 		}
 	  }
-      const sessions = (await chatManager.getUserSessions()).reverse().flat();
+      const sessions = (await chatManager.getUserSessions())
       setListSessions(sessions);
-
       if (sessions.length > 0) {
         const storedSessionId = localStorage.getItem('sessionId');
 
@@ -90,7 +89,7 @@ function App() {
 	  event.preventDefault();
 	  handleCreateNewChat();
 	}
-  }, [handleOpenCloseNavMenu]);
+  }, [handleCreateNewChat]);
 
   useEffect(() => {
     chatManager.setNewMessageCallback((newMessages) => {
@@ -104,10 +103,9 @@ function App() {
     initSessions();
 	window.addEventListener('keydown', handleKeyDown);
     return () => {
-      chatManager.disconnect();
 	  window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [chatManager, initSessions]);
+  }, [chatManager, handleKeyDown, initSessions]);
 
   return (
     <Box className="App">
