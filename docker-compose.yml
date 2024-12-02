@@ -6,8 +6,7 @@ services:
     container_name: frontend
     ports:
       - 80:80
-    env_file:
-      - .env
+      - 443:443
     depends_on:
       backend:
         condition: service_started
