@@ -8,8 +8,6 @@ COPY public/ public/
 COPY src/ src/
 COPY . .
 
-COPY .env /app/.env
-
 RUN npm run build
 
 FROM nginx:stable-alpine
