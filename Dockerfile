@@ -1,14 +1,18 @@
-# Utilise l'image officielle Node.js 20 comme base
-FROM node:20
+FROM node:20 as build
+WORKDIR /app
 
-WORKDIR /usr/src/app
+COPY package.json package-lock.json ./
+RUN npm install --no-audit
 
-COPY package*.json ./
-
-RUN npm install --production
-
+COPY public/ public/
+COPY src/ src/
 COPY . .
 
-EXPOSE 3000
+RUN npm run build
 
-CMD ["npm", "start"]
+FROM nginx:stable-alpine
+COPY --from=build /app/build /usr/share/nginx/html
+
+EXPOSE 80 443
+
+CMD ["nginx", "-g", "daemon off;"]

@@ -17,6 +17,7 @@ import {
 	MessageProps 
 } from "./components/message/message";
 import "./App.css";
+import Config from "./config/config";
 
 function App() {
   const [showNavMenu, setShowNavMenu] = useState(false);
@@ -26,6 +27,8 @@ function App() {
   const [activeSession, setActiveSession] = useState<string | null>(() => localStorage.getItem('sessionId'));
   const [helpModalOpen, setHelpModalOpen] = useState(false);
   const [contactModalOpen, setContactModalOpen] = useState(false);
+
+  console.log('API URL:', Config.API_URL);
 
   const handleOpenCloseHelpModal = () => {
 	setHelpModalOpen((prev) => !prev);
