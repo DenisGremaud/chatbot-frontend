@@ -43,7 +43,7 @@ class ChatManager {
 
   private initSocket() {
 
-    this.socket = io(Config.SOCKET_URL, {
+    this.socket = io(Config.API_URL, {
 		transports: ['websocket'],
 		reconnection: true,
 		reconnectionDelay: 1000,
