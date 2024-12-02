@@ -9,8 +9,7 @@ COPY src/ src/
 COPY . .
 
 ARG REACT_APP_BACKEND_URL
-
-RUN printenv
+ARG GENERATE_SOURCEMAP
 
 RUN npm run build
 
