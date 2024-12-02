@@ -18,6 +18,7 @@ import {
 } from "./components/message/message";
 import "./App.css";
 import Config from "./config/config";
+require('dotenv').config()
 
 function App() {
   const [showNavMenu, setShowNavMenu] = useState(false);
