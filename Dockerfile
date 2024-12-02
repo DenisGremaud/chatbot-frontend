@@ -8,7 +8,8 @@ COPY public/ public/
 COPY src/ src/
 COPY . .
 
-# log the environment variables
+ENV REACT_APP_BACKEND_URL=https://chatbot-backend-production-548e.up.railway.app
+
 RUN printenv
 
 RUN npm run build
