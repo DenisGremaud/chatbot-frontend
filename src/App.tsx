@@ -17,8 +17,6 @@ import {
 	MessageProps 
 } from "./components/message/message";
 import "./App.css";
-import Config from "./config/config";
-require('dotenv').config()
 
 function App() {
   const [showNavMenu, setShowNavMenu] = useState(false);
@@ -29,8 +27,7 @@ function App() {
   const [helpModalOpen, setHelpModalOpen] = useState(false);
   const [contactModalOpen, setContactModalOpen] = useState(false);
 
-  console.log('API URL:', Config.API_URL);
-  console.log('API URL:', process.env.REACT_APP_BACKEND_URL);
+  console.log(process.env);
 
   const handleOpenCloseHelpModal = () => {
 	setHelpModalOpen((prev) => !prev);
