@@ -29,6 +29,7 @@ function App() {
   const [contactModalOpen, setContactModalOpen] = useState(false);
 
   console.log('API URL:', Config.API_URL);
+  console.log('API URL:', process.env.REACT_APP_BACKEND_URL);
 
   const handleOpenCloseHelpModal = () => {
 	setHelpModalOpen((prev) => !prev);
