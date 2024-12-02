@@ -8,7 +8,7 @@ COPY public/ public/
 COPY src/ src/
 COPY . .
 
-ENV REACT_APP_BACKEND_URL=https://chatbot-backend-production-548e.up.railway.app
+ARG REACT_APP_BACKEND_URL
 
 RUN printenv
 
