@@ -183,6 +183,7 @@ class ChatManager {
           throw new Error(`Error fetching sessions: ${response.statusText}`);
         }
         const session_ids = await response.json().then((data) => data.session_ids);
+		console.log(session_ids);
         return session_ids || [];
       } catch (error) {
         console.error('Failed to fetch user sessions:', error);
