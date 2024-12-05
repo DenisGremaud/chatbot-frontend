@@ -195,7 +195,7 @@ class ChatManager {
   }
 
   public restoreSession(sessionId: string) {
-	this.socket?.emit('restore_session', { sessionId: sessionId });
+	this.socket?.emit('restore_session', { sessionId: sessionId, userUuid: this.userUUID });
   }
 
   public getStoredSessionId(): string | null {
