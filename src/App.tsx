@@ -62,8 +62,8 @@ function App() {
 			await chatManager.createUserUUID();
 		}
 	  }
-      const sessions = (await chatManager.getUserSessions())
-      setListSessions(sessions);
+      const sessions = (await chatManager.getUserSessions()) || [];
+      setListSessions(sessions.reverse());
       if (sessions.length > 0) {
         const storedSessionId = localStorage.getItem('sessionId');
 
