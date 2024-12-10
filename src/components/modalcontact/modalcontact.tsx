@@ -26,7 +26,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ open, handleClose }) => {
         </Typography>
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
           Pour toute question générale, veuillez consulter le site de <a href="https://www.unil.ch/" target="_blank" rel="noopener noreferrer">L'UNIL</a>, <br />
-		  vous pouvez également consulter la page de <a href="https://www.unil.ch/central/home/contact.html" target="_blank" rel="noopener noreferrer">Contact</a>, <br />
+		  vous pouvez également consulter la page de <a href="https://www.unil.ch/unil/fr/home/contact.html" target="_blank" rel="noopener noreferrer">Contact</a>, <br />
           ou encore appeler le numéro suivant : +41 21 692 11 11.
         </Typography>
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
